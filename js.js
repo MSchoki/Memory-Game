@@ -1,3 +1,10 @@
+var audioPair = new Audio('sounds/collect_coin.mp3');
+var audioWon = new Audio('sounds/tusch.mp3');
+var audioError = new Audio('sounds/error.mp3');
+var audioPlayCard = new Audio('sounds/play_card.mp3');
+
+
+
 const picA = "img/baby.jpg";
 const picB = "img/bamboo.jpg";
 const picC = "img/dog.jpg";
@@ -28,6 +35,20 @@ const card15 = document.querySelector('.card15');
 const card16 = document.querySelector('.card16');
 const card17 = document.querySelector('.card17');
 const card18 = document.querySelector('.card18');
+
+function JSalert() {
+// A confirm dialog
+    alertify.alert("Congrats! You finished the game!");
+    alertify.confirm("Your final score: " + counter + ". <br> Do you want to play again?", function (e) {
+        if (e) {
+            document.location.reload();
+        }
+        // if the player doesn't want to play again all EventListeners will be removed:
+        else {
+            alertify.alert("Thank you for playing!");
+            }
+    });
+}
 
 // creates a random number between a given range:
 function rand(range) {
@@ -195,6 +216,7 @@ let counter = 0;
 const points = document.querySelector('span');
 var firstCard = 'none';
 var secondCard = 'none';
+var foundPairs = 0;
 
 function Sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -203,6 +225,7 @@ function Sleep(milliseconds) {
 async function clickedBox(event) {
     click++;
     console.log('Klick:' + click);
+    audioPlayCard.play();
 
     if (click === 1) {
         firstCard = event.target.parentElement;
@@ -219,9 +242,11 @@ async function clickedBox(event) {
 
     // if the two clicked cards have the same img they disappear:
     if (firstCard.style.backgroundImage === secondCard.style.backgroundImage && click === 2) {
-
+        foundPairs++;
+        await Sleep(1000); // Pausiert die Funktion für 1 Sekunden
+        audioPair.play();
         console.log("Vor der sleep-Funktion. Die Bilder sind gleich.");
-        await Sleep(3000); // Pausiert die Funktion für 3 Sekunden
+        await Sleep(1000); // Pausiert die Funktion für 1 Sekunden
         console.log("Nach der Sleep Funktion");
 
         firstCard.removeAttribute('style', 'background-image');
@@ -233,10 +258,16 @@ async function clickedBox(event) {
         counter += 20;
         points.textContent = counter.toString();
         click = 0;
+        if (foundPairs === 9) {
+            audioWon.play();
+            JSalert();
+        }
     }
     else if (firstCard.style.backgroundImage != secondCard.style.backgroundImage && click === 2) {
+        await Sleep(1000); // Pausiert die Funktion für 1 Sekunden
+        audioError.play();
         console.log("Vor der sleep-Funktion. Die Bilder sind verschieden.");
-        await Sleep(3000); // Pausiert die Funktion für 3 Sekunden
+        await Sleep(2000); // Pausiert die Funktion für 2 Sekunden
         console.log("Nach der Sleep Funktion");
         const back = '<img src="img/background.jpg" alt="blue background"/>';
         firstCard.insertAdjacentHTML('afterbegin', back);
