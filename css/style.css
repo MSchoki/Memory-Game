@@ -87,12 +87,6 @@ span {
     }
 }
 
-header {
-    grid-column: 1 / span 6;
-    grid-row-start: 1;
-    grid-row-end: 3;
-}
-
 .container {
     position: relative;
     display: grid;
@@ -102,7 +96,7 @@ header {
     min-height: 200px;
     margin: 0 auto;
     padding: 10px;
-    grid-template: 1fr 0.5fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .box {

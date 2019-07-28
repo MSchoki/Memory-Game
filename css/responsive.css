@@ -1,6 +1,6 @@
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
     .container {
-        grid-template: 1.5fr 0.5fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
+        grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
         padding: 0;
     }
 
@@ -13,12 +13,6 @@
         font-size: 25px;
         font-weight: lighter;
         margin: 5px 0;
-    }
-
-    header {
-        grid-column: 1 / span 4;
-        grid-row-start: 1;
-        grid-row-end: 3;
     }
 
     .title {
@@ -49,10 +43,15 @@
     }
 }
 
-@media screen and (min-width: 401px) and (max-width: 800px) {
+@media screen and (min-width: 501px) and (max-width: 800px) {
     .container {
-        grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
+        grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
         padding: 0;
+    }
+
+    .icon {
+        max-width: 50px;
+        top: 10px;
     }
 
     .move {
@@ -62,12 +61,6 @@
     h1 {
         font-weight: lighter;
         margin: 5px 0;
-    }
-
-    header {
-        grid-column: 1 / span 4;
-        grid-row-start: 1;
-        grid-row-end: 2;
     }
 
     h2 {
